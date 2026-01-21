@@ -64,7 +64,7 @@ Params['kc']       = 20.0
 Params['BiasStrFloor'] = 20.0
 Params['BiasStrMax']   = 200.0
 
-Params['OutDir']     = '../DataTest/'
+Params['OutDir']     = '../Simulation_Results/'
 Params['fnums']      = 0
 Params['dnums']      = 1000000
 
