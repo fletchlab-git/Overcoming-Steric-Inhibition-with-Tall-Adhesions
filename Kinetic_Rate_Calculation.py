@@ -115,8 +115,8 @@ def StoreResults(results, alpha, OutDir, fields):
     fp.write('\n')
   fp.close()
 
-InDir  = 'rhoLBT500/'
-OutDir = 'rhoLBT500/'
+InDir  = 'Free_Energies/'
+OutDir = 'Kinetic_Rates/'
 
 if len(argv)>1:
   InDir = argv[1]
@@ -126,7 +126,7 @@ if len(argv)>1:
 #R = 1e3
 
 R=1000
-alphalist = [1.,1e-5,1e-8,1e-10, 1e-11, 1e-12, 1e-13,1e-14,1e-15, 1e-17, 1e-20]
+alphalist = [1e-11]
 #alphalist = [1e-20]
 fields    = ['LSBT', 'rhoSBT', 'LSBB', 'rhoSBB', 'LBYT', 'rhoBYT', 'LBYB', 'rhoBYB', 'LLBT', 'rhoLBT', 'LLBB', 'rhoLBB']
 rcutoff   = 15.
@@ -136,95 +136,5 @@ for alpha in alphalist:
   StoreResults(results, alpha, OutDir, fields)
   #MakePlots(resultset, keys, alpha)
 
-
-# def ObtainRates(R, alpha, InDir):
-#   AllFiles = filter(lambda x: 'ThetaAveFE_' in x, listdir(InDir))
-#   resultset     = []
-#   for j, FEfiles in enumerate(FileSet):
-#     hlonglist = FetchhUniqueVals(FEfiles, 'Ll')
-#     results   = []
-# 
-#     for hlong in hlonglist:
-#       fracs  = GetFracsforhlong(FEfiles, hlong)
-#       nfracs = int(size(fracs))
-# 
-#       hvals = zeros((nfracs,200))
-#       Fvals = zeros((nfracs,200))
-#       ndat  = zeros(nfracs)
-# 
-#       # read free energy profiles
-#       index=0
-#       
-#       for bindfrac in fracs:
-#           filename = [ f for f in FEfiles if (('Ll_'+str(hlong) in f) and ('percent_'+str(bindfrac) in f)) ][0]
-#           hvals[index,:], Fvals[index,:], ndat[index] = readhf(filename)
-#           index = index + 1
-#           print filename
-# 
-#       # extract key features from free energy profiles
-#       Fmax = zeros(nfracs)
-#       indexmax = zeros(nfracs)
-#       hmax = zeros(nfracs)
-#       Fmin = zeros(nfracs)
-#       indexmin = zeros(nfracs)
-#       hmin = zeros(nfracs)
-#       Fddag = zeros(nfracs)
-#       indexddag = zeros(nfracs)
-#       hddag = zeros(nfracs)
-# 
-#       for index in range(nfracs):
-#           indexmax[index] = argmax(Fvals[index])
-#           Fmax[index] = Fvals[index][int(indexmax[index])]
-#           hmax[index] = hvals[index][int(indexmax[index])]
-# 
-#           indexmin[index] = argmin(Fvals[index])
-#           Fmin[index] = Fvals[index][int(indexmin[index])]
-#           hmin[index] = hvals[index][int(indexmin[index])]
-# 
-#           # check if free energy maximum occurs
-#           # at the short-bound barrier
-#           if hmax[index]<30:
-#               indexddag[index] = indexmax[index]
-#               Fddag[index] = Fmax[index]
-#               hddag[index] = hmax[index]
-#           else:
-#               indexddag[index] = 0
-#               Fddag[index] = Fvals[index][0]
-#               hddag[index] = hvals[index][0]
-# 
-# 
-#       logratelist = 0*fracs
-# 
-#       print("binder complex length = ", 2*hlong)
-#       print("binding fraction, log of rate")
-#       print("-----------------------------")
-# 
-#       # perform rate calculation
-#       for index in range(nfracs):
-#           intsum=0
-#           for i in range(int(ndat[index])-1):
-#               dh = hvals[index][i+1]-hvals[index][i]
-#               intsum = intsum + dh*exp(Fvals[index][i]-Fmax[index])
-# 
-#           A = Fmax[index] + log(intsum/R)
-# 
-#           intsum2=0
-#           for i in range(int(ndat[index])-1):
-#               dh = hvals[index][i+1]-hvals[index][i]
-# 
-#               for j in range(i):
-#                   dh2 = hvals[index][j+1]-hvals[index][j]
-#                   intsum2 = intsum2 + dh*dh2* \
-#                       exp(-Fvals[index][i]+Fmin[index] \
-#                           +Fvals[index][j]-Fddag[index])
-# 
-#           B = Fddag[index]-Fmin[index] + log(alpha) + log(intsum2/R**2)
-# 
-#           lograte = -add_exp(array([0,A,B]))
-#           logratelist[index]=lograte
-#           print(fracs[index],lograte)
-#       results.append([fracs, logratelist, str(hlong)])
-#     resultset.append(results)
-#   return resultset, keys
 
 
