@@ -2,13 +2,12 @@ import os
 import numpy as np
 import subprocess as sp
 
-#os.chdir("C:\\Users\\jared\\Downloads\\bystander_simulations\\bystander_simulations\\runscripts\\")
 def PrintCMDS(cmds):
   for c in cmds:
     print(c.split(';')[0], c.split('-w')[1].split('--')[0])
 
 def ConstructCMD(Params):
-  CMD = '''LatticeMembrane --Tag='JaredExperimentHarmonicNoBind_rhoBYT_{P[rhoBYT]}_rhoLBT_{P[rhoLBT]}_ULB_{P[ULB]}_percent_{P[perc]}'  '''.format(P = Params)
+  CMD = '''LatticeMembrane --Tag='ExperimentNoBind_rhoBYT_{P[rhoBYT]}_rhoLBT_{P[rhoLBT]}_ULB_{P[ULB]}_percent_{P[perc]}'  '''.format(P = Params)
   CMD = CMD + "--MCSweeps={P[MCSweeps]} --BiasStr={P[Bst]} --Equil='No' -v 'Minimum' ".format(P = Params)
   CMD = CMD + "--MeshDisp={P[MDisp]} --z0={P[zc]} -w {P[zc]} --BC='Frame' ".format(P = Params)
   CMD = CMD + "--Lx={P[Lx]} --Ly={P[Lx]} --kc={P[kc]} --Nx {P[Nx]} --Ny {P[Nx]} ".format(P = Params)
