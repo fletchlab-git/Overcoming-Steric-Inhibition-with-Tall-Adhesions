@@ -27,4 +27,5 @@ A third Python script uses the free energy profiles from Free_Energy.dat to calc
 
 
 **Example Data**
+
 Example results from MC simulations are provided in 'MC_Simulations/Simulation_Results/DataFiles'. Example free energy profile is included in the directory 'Free_Energies', and an example kinetic rate calculation output is included in the directory 'Kinetic_Rates'.
