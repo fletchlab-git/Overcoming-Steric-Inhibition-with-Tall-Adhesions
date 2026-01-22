@@ -22,7 +22,7 @@ def add_exp(exponents):
 # read in a free energy profile
 def readhf(filename, rcutoff):
     infile = open(filename,"r")
-    lines = infile.readlines()
+    lines = infile.readlines()[1:]
     infile.close()
 
     hvals = []
@@ -78,13 +78,14 @@ def ComputeEnhancement( rawDat, Features, Params):
   return [lograte, A, B, intsum, intsum2, Fddag, Fmin, Fmax,np.exp(lograte)] 
 
 def ObtainRates(R, alpha, InDir, fields, rcutoff):
-  AllFiles = [InDir+f for f in filter(lambda x: 'ThetaAveFE_' in x, listdir(InDir))]
-  results  = np.zeros((len(fields) + 8,))
+  AllFiles = [InDir+f for f in filter(lambda x: 'Free_Energy' in x, listdir(InDir))]
+  results  = np.zeros((len(fields) + 9,))
   for i, fname in enumerate(AllFiles):
     #print(fname)
     rawDat, firstline = readhf(fname, rcutoff)
     res  = []
     Features = ExtractFeatures(rawDat)
+    firstline = '# LLBT=4.25 rhoLBT=200.0 LLBB=40.0 rhoLBB=400.0 LBYT=17.5 rhoBYT=4000.0 LBYB=17.5 rhoBYB=7600.0 LSBT=10.5 rhoSBT=200.0 LSBB=7.5 rhoSBB=200.0 ULB=4.75 USB=10.5 A=0.7056'
     for field in fields:
       res.append(ExtractVal(field, firstline))
     res += ComputeEnhancement(rawDat, Features, [alpha, R])
@@ -97,23 +98,43 @@ def StoreResults(results, alpha, OutDir, fields):
   results = results[ind]
 
   fp = open(OutDir+'kineticEnhancement_alpha_{}_.dat'.format(alpha), 'w')
-  line ='#'
-  for i, p in enumerate(fields):
-    line = line + p + '('+str(i+1)+') '
-  line += 'enh({}) '.format(i + 2)
-  line += 'A({}) '.format(i + 3)
-  line += 'B({}) '.format(i + 4)
-  line += 'intsum1({}) '.format(i + 5)
-  line += 'intsum2({}) '.format(i + 6)
-  line += 'Fddag({}) '.format(i + 7)
-  line += 'Fmin({}) '.format(i + 8)
-  line += 'Fmax({}) '.format(i + 9)
-  line += 'K_hort/K_diff{}) '.format(i + 10)
+  #line ='#'
+  #for i, p in enumerate(fields):
+  #  line = line + p + '('+str(i+1)+') '
+  #line += 'enh({}) '.format(i + 2)
+  #line += 'A({}) '.format(i + 3)
+  #line += 'B({}) '.format(i + 4)
+  #line += 'intsum1({}) '.format(i + 5)
+  #line += 'intsum2({}) '.format(i + 6)
+  #line += 'Fddag({}) '.format(i + 7)
+  #line += 'Fmin({}) '.format(i + 8)
+  #line += 'Fmax({}) '.format(i + 9)
+  #line += 'K_short/K_diff({}) '.format(i + 10)
+
+
+  line = '# '
+
+  i = 0   # start indexing if you want consistent numbering
+
+  line += 'enh({}) '.format(i + 1)
+  line += 'A({}) '.format(i + 2)
+  line += 'B({}) '.format(i + 3)
+  line += 'intsum1({}) '.format(i + 4)
+  line += 'intsum2({}) '.format(i + 5)
+  line += 'Fddag({}) '.format(i + 6)
+  line += 'Fmin({}) '.format(i + 7)
+  line += 'Fmax({}) '.format(i + 8)
+  line += 'K_short/K_diff({}) '.format(i + 9)
+  #print(res1)
   fp.write( line + '\n')
-  
   for res in results:
-    for r in res:
-      fp.write(str(r)+' ')
+    a = 0
+    for idx, r in enumerate(res):
+    #for r in res:
+      if idx < 12:
+        continue
+      else:
+        fp.write(str(r)+' ')
     fp.write('\n')
   fp.close()
 

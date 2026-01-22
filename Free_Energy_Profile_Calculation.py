@@ -12,7 +12,7 @@ import scipy
 from scipy.integrate import cumulative_trapezoid
 
 
-dirList  = ['Bystander_Simulations/Simulation_Results/DataFiles/']
+dirList  = ['MC_Simulations/Simulation_Results/DataFiles/']
 OutDir = 'Free_Energies/'
 
 
@@ -37,7 +37,8 @@ for i in range(len(dirList)):
         substring = 'theta0_'
         index = file.find(substring)
         str1=str(pd.read_csv(filePath).loc[3])
-        biaStr=float(str1[38:40])
+        #biaStr=float(str1[38:40])
+        biaStr=20
         my_string=pd.read_csv(filePath).iloc[4,0]
         theta=float(my_string.split("   Bias location:   ",1)[1])
         thetas.append(theta)
@@ -81,6 +82,6 @@ for i in range(len(dirList)):
     FreeEnergyList.append(F6)
     AnglesList.append(newDF['MeanThetaTop'])
     meanFE=pd.DataFrame({'Distance':newDF['MeanThetaTop'],'Force':newDF['atMin'],'FE':F6})
-    print(meanFE['FE'])
+    #print(meanFE['FE'])
     filename = "Free_Energy.dat"
     meanFE.to_csv(OutDir+ filename,sep = ' ', index=False)
