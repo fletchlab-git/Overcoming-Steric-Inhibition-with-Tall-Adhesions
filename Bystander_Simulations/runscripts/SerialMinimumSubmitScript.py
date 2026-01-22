@@ -7,7 +7,7 @@ def PrintCMDS(cmds):
     print(c.split(';')[0], c.split('-w')[1].split('--')  [0])
 
 def ConstructCMD(Params):
-  CMD = '''LatticeMembrane --Tag='data_Z_{P[zc]}'  '''.format(P = Params)
+  CMD = '''LatticeMembrane --Tag='Z_{P[zc]}'  '''.format(P = Params)
   CMD = CMD + "--MCSweeps={P[MCSweeps]} --BiasStr={P[Bst]} --Equil='No' -v 'Minimum' ".format(P = Params)
   CMD = CMD + "--MeshDisp={P[MDisp]} --z0={P[zc]} -w {P[zc]} --BC='Frame' ".format(P = Params)
   CMD = CMD + "--Lx={P[Lx]} --Ly={P[Lx]} --kc={P[kc]} --Nx {P[Nx]} --Ny {P[Nx]} ".format(P = Params)
@@ -55,7 +55,7 @@ Params['cores']    = 8
 Params['res']      = 2.0
 Params['RepNums']  = 1
 
-Params['MCSweeps'] = 1200000
+Params['MCSweeps'] = 70000
 #Params['MCSweeps'] = 500000
 
 Params['MDisp']    = 1.5

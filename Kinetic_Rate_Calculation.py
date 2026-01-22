@@ -51,6 +51,7 @@ def ExtractFeatures(rawDat):
   return [Fmax, Fmin, Fddag]
 
 def ComputeEnhancement( rawDat, Features, Params):
+  print(rawDat)
   hvals, Fvals, ndat = rawDat
   Fmax, Fmin, Fddag  = Features
   alpha, R           = Params 
@@ -88,7 +89,7 @@ def ObtainRates(R, alpha, InDir, fields, rcutoff):
       res.append(ExtractVal(field, firstline))
     res += ComputeEnhancement(rawDat, Features, [alpha, R])
     results  = np.vstack((results, res))
- 
+  #print(results)
   return results[1:, :]
 
 def StoreResults(results, alpha, OutDir, fields):
