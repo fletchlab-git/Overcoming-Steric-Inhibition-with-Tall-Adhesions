@@ -5,6 +5,7 @@ Updated January 21, 2026
 
 This repository contains the code and data necessary to reproduce figures from "Overcoming steric inhibition of antibody-dependent phagocytosis with tall adhesions
 " by Aaron M. Joffe*, Aymeric Chorlay*, Jared Huzar, Jaffar Hasnain, Phillip L. Geissler, and Daniel A. Fletcher. This article is available in preprint form on BioxRiv at [https://www.biorxiv.org/content/10.1101/2024.08.25.609594v1](https://www.biorxiv.org/content/10.64898/2026.01.09.698749v1).
+
 *These authors contributed equally.
 
 Briefly, This readme describes the architecture of a Monte Carlo simulation code that models the interaction between a flexible membrane and a rigid surface, both decorated with adhesive and non-adhesive molecules.
