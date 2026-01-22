@@ -12,7 +12,7 @@ Briefly, This readme describes the architecture of a Monte Carlo simulation code
 
 ### Three-Module Architecture
 
-**Module 1: Monte_Carlo_Simulation**
+**Module 1: Monte Carlo Simulation**
 The directory MC_Simulations contains a C code named "LatticeMembrane" (running on Linux) that executes the Monte Carlo simulation. Python programs in the directory 'runscripts' execute the MC simulations and allow users to adjust input parameters such as the protein height, density, and interactions of molecules on each surface. 
 
 For each distance Z imposed by a bias potential between the two surfaces, the LatticeMembrane code performs Monte Carlo sweeps and calculates various quantities (bias energy, mesh energy, total energy, potential energy, membrane average separation, etc.) for each sweep. Results are stored in a data_Z_zvalue.dat file. All results are stored in a "Simulation_Results/DataFiles" folder containing one data_Z_zvalue.dat file for each imposed Z.
