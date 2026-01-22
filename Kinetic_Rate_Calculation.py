@@ -74,7 +74,7 @@ def ComputeEnhancement( rawDat, Features, Params):
   #print(R)
   print(np.exp(lograte))
   print('\n')
-  return [lograte, A, B, intsum, intsum2, Fddag, Fmin, Fmax] 
+  return [lograte, A, B, intsum, intsum2, Fddag, Fmin, Fmax,np.exp(lograte)] 
 
 def ObtainRates(R, alpha, InDir, fields, rcutoff):
   AllFiles = [InDir+f for f in filter(lambda x: 'ThetaAveFE_' in x, listdir(InDir))]
@@ -107,6 +107,7 @@ def StoreResults(results, alpha, OutDir, fields):
   line += 'Fddag({}) '.format(i + 7)
   line += 'Fmin({}) '.format(i + 8)
   line += 'Fmax({}) '.format(i + 9)
+  line += 'K_hort/K_diff{}) '.format(i + 10)
   fp.write( line + '\n')
   
   for res in results:

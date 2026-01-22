@@ -7,7 +7,7 @@ def PrintCMDS(cmds):
     print(c.split(';')[0], c.split('-w')[1].split('--')  [0])
 
 def ConstructCMD(Params):
-  CMD = '''LatticeMembrane --Tag='Experiment_rhoBYT_{P[rhoBYT]}_rhoLBT_{P[rhoLBT]}_Ll_{P[LLBT]}_ULB_{P[ULB]}_percent_{P[perc]}'  '''.format(P = Params)
+  CMD = '''LatticeMembrane --Tag='data_Z_{P[zc]}'  '''.format(P = Params)
   CMD = CMD + "--MCSweeps={P[MCSweeps]} --BiasStr={P[Bst]} --Equil='No' -v 'Minimum' ".format(P = Params)
   CMD = CMD + "--MeshDisp={P[MDisp]} --z0={P[zc]} -w {P[zc]} --BC='Frame' ".format(P = Params)
   CMD = CMD + "--Lx={P[Lx]} --Ly={P[Lx]} --kc={P[kc]} --Nx {P[Nx]} --Ny {P[Nx]} ".format(P = Params)
@@ -36,7 +36,7 @@ def CompleteParams(Params):
   #Params['rhoLBB'] = 400.0
   return Params
 
-percentlist = [6.0,7.0,8.0,9.0]
+percentlist = [6.0]
 #percentlist = [2.0, 4.0, 6.0, 8.0]
 #percentlist = [5.0]
 #percentlist = [11.0,12.0]
@@ -44,7 +44,7 @@ percentlist = [6.0,7.0,8.0,9.0]
 #lenlist     = [20., 30., 40.]
 #lenlist     = [10.0,15.0,20.0,25.0,30.0,35.0,40.0]
 lenlist      = [20.0]
-rhoLBlist   = [500.0,1000.0]
+rhoLBlist   = [500.0]
 
 #rhoBYlist   = [5000.0]
 rhoBYlist = [4000.0]
